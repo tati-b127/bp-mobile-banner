@@ -103,6 +103,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     btnTop.addEventListener("click", () => {
       href = btnTop.dataset.href;
+      console.log(href);
       if (!btnTop.classList.contains("active")) {
         btnBottom.classList.remove("active");
         btnTop.classList.add("active");
@@ -110,6 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
     btnBottom.addEventListener("click", () => {
       href = btnBottom.dataset.href;
+      console.log(href);
       if (!btnBottom.classList.contains("active")) {
         btnTop.classList.remove("active");
         btnBottom.classList.add("active");
@@ -133,24 +135,48 @@ window.addEventListener("DOMContentLoaded", () => {
     footerLink1.innerHTML = data.footerLink1STR;
     footerLink2.innerHTML = data.footerLink2STR;
     footerLink3.innerHTML = data.footerLink2STR;
-    fontsize(btnTop, btnTopTitle, btnTopSubLeft);
-    fontsize(btnBottom, btnTopTitle, btnTopSubLeft);
+    fontsize(btnTopTitle, btnBottomTitle, 16);
+    fontsize(btnTopSubRight, btnTopSubRight, 16);
+    fontSizeFooter(12);
   }
-  function fontsize(btn, btnTitle, btnSubTitle) {
-    let blockWidth = btnTitle.offsetWidth;
-    const initialMinFontSize = 16;
-    let maxWidth = btnTitle.clientWidth;
-    let maxHeight = btnTitle.clientHeight;
-    let fontSize = maxHeight;
-    let minFontSize = initialMinFontSize;
-    let maxFontSize = fontSize;
-    let optimalSize = Math.floor((maxFontSize + minFontSize) / 2);
-    // btnTitle.style.fontSize = optimalSize + "px";
 
-    // btnTitle.style.fontSize =
-    //   (blockWidth / btnTitle.innerHTML.length) * 1.8 + "px";
-    // btnSubTitle.style.fontSize =
-    //   (blockWidth / btnTitle.innerHTML.length) * 1.8 + "px";
-    // text.style.left = w / 9 + "px";
+  function fontSizeFooter(fs) {
+    const k = 1.8;
+    const footerList = document.querySelector(".footer__list");
+    const footerLinks = document.querySelectorAll(".footer__link");
+    const footerWrapperWidth = footerList.clientWidth / 3;
+    let textW = 0;
+    let textS = 0;
+    let fontS;
+    footerLinks.forEach((link) => {
+      if (footerWrapperWidth < link.offsetWidth) {
+        textW = footerWrapperWidth / link.innerHTML.length;
+        if (textS < textW * k) {
+          textS = textW * k;
+        }
+        fontS = Math.floor(textS) + "px";
+      } else {
+        fontS = fs + "px";
+      }
+      link.style.fontSize = fontS;
+    });
+  }
+  function fontsize(text1, text2, fs) {
+    const k = 1.4;
+    let text1Width = text1.clientWidth / text1.innerHTML.length;
+    let text2Width = text2.clientWidth / text2.innerHTML.length;
+    let text1Font = text1Width * k;
+    let text2Font = text2Width * k;
+
+    if (text1Width > text2Width && text1Font <= fs) {
+      text1.style.fontSize = Math.floor(text1Font) + "px";
+      text2.style.fontSize = Math.floor(text1Font) + "px";
+    } else if (text1Width < text2Width && text2Font <= fs) {
+      text1.style.fontSize = Math.floor(text2Font) + "px";
+      text2.style.fontSize = Math.floor(text2Font) + "px";
+    } else {
+      text1.style.fontSize = fs + "px";
+      text2.style.fontSize = fs + "px";
+    }
   }
 });
