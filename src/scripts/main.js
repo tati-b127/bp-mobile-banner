@@ -41,7 +41,6 @@ window.addEventListener("DOMContentLoaded", () => {
       } else if (paramLang === lang.fr || locale === localeList.FR) {
         getLocaleText(response.frJson);
       } else if (paramLang === lang.ja || locale === localeList.JA) {
-        console.log(response.jaJson.Continue);
         getLocaleText(response.jaJson);
       } else if (paramLang === lang.pt || locale === localeList.PT) {
         getLocaleText(response.ptJson);
@@ -145,19 +144,24 @@ window.addEventListener("DOMContentLoaded", () => {
     const footerList = document.querySelector(".footer__list");
     const footerLinks = document.querySelectorAll(".footer__link");
     const footerWrapperWidth = footerList.clientWidth / 3;
-    let textW = 0;
     let textS = 0;
     let fontS;
     footerLinks.forEach((link) => {
+      console.log(link.offsetWidth, link.offsetHeight, footerWrapperWidth);
       if (footerWrapperWidth < link.offsetWidth) {
-        textW = footerWrapperWidth / link.innerHTML.length;
-        if (textS < textW * k) {
+        console.log(paramLang === lang.ja);
+        let textW = footerWrapperWidth / link.innerHTML.length;
+        if (textS < textW * k && textW * k < fs) {
           textS = textW * k;
+          fontS = Math.floor(textS) + "px";
+        } else if (textW * k >= fs) {
+          fontS = fs + "px";
         }
-        fontS = Math.floor(textS) + "px";
       } else {
         fontS = fs + "px";
       }
+    });
+    footerLinks.forEach((link) => {
       link.style.fontSize = fontS;
     });
   }
