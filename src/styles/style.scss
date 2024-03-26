@@ -84,7 +84,7 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 0;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
     gap: 8px;
     &__item {
       position: relative;
@@ -104,7 +104,7 @@ body {
       position: absolute;
       bottom: 0;
       left: 0;
-      padding: 10.8px 7.2px;
+      padding: 12px 7px;
       font-size: 11px;
       font-weight: 400;
       z-index: 2;
@@ -126,7 +126,7 @@ body {
   &__btn_offer {
     position: absolute;
     top: -11px;
-    right: 10px;
+    right: 23px;
     padding: 3px 10px;
     min-width: 120px;
     color: #141131;
@@ -270,7 +270,7 @@ body {
       font-size: clamp(40px, 1.2321rem + 5.7143vw, 2.625rem);
     }
     .btn.continue {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
   }
   // .footer {
@@ -298,8 +298,8 @@ body {
   }
   .banner {
     .btn.continue {
-      margin-top: 16px;
-      margin-bottom: 14px;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
     &__title {
       font-size: 42px;
