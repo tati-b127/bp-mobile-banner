@@ -2,7 +2,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const URL = window.location.href;
   const locale = navigator.language;
   const paramLang = new URLSearchParams(window.location.search).get("lang");
-  console.log(paramLang);
   let localeList = {
     RU: "ru-RU",
     DE: "de-DE",
@@ -31,7 +30,6 @@ window.addEventListener("DOMContentLoaded", () => {
       return { deJson, enJson, esJson, frJson, jaJson, ptJson };
     })
     .then((response) => {
-      console.log(navigator.language);
       if (paramLang === lang.de || locale === localeList.DE) {
         getLocaleText(response.deJson);
       } else if (paramLang === lang.en || locale === localeList.EN) {
@@ -48,7 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
         getLocaleText(response.enJson);
       }
       if (locale === localeList.RU) {
-        console.log("You locale ru-RU");
+        console.debug("You locale ru-RU");
       }
     });
   function getLocaleText(localeJson) {
@@ -98,11 +96,9 @@ window.addEventListener("DOMContentLoaded", () => {
     const footerLink3 = document.querySelector(".footer__link_3");
 
     let href = btnTop.dataset.href;
-    console.log(href);
 
     btnTop.addEventListener("click", () => {
       href = btnTop.dataset.href;
-      console.log(href);
       if (!btnTop.classList.contains("active")) {
         btnBottom.classList.remove("active");
         btnTop.classList.add("active");
@@ -110,7 +106,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
     btnBottom.addEventListener("click", () => {
       href = btnBottom.dataset.href;
-      console.log(href);
       if (!btnBottom.classList.contains("active")) {
         btnTop.classList.remove("active");
         btnBottom.classList.add("active");
@@ -125,10 +120,19 @@ window.addEventListener("DOMContentLoaded", () => {
     wrapperTitle2.innerHTML = data.wrapperTitle2STR;
     wrapperTitle3.innerHTML = data.wrapperTitle3STR;
     btnTopTitle.innerHTML = data.btnTopTitleSTR;
-    btnTopSubLeft.innerHTML = data.btnTopSubLeftSTR;
-    btnTopSubRight.innerHTML = data.btnTopSubRightSTR;
+    btnTopSubLeft.innerHTML = data.btnTopSubLeftSTR.replace(
+      /{{price}}/,
+      "$39.99"
+    );
+    btnTopSubRight.innerHTML = data.btnTopSubRightSTR.replace(
+      /{{price}}/,
+      "$0.48"
+    );
     btnBottomTitle.innerHTML = data.btnBottomTitleSTR;
-    btnBottomSubRight.innerHTML = data.btnBottomSubRightSTR;
+    btnBottomSubRight.innerHTML = data.btnBottomSubRightSTR.replace(
+      /{{price}}/,
+      "$6.99"
+    );
     btnOffer.innerHTML = data.btnOfferSTR;
     btnContinue.innerHTML = data.btnContinueSTR;
     footerLink1.innerHTML = data.footerLink1STR;
@@ -147,9 +151,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let textS = 0;
     let fontS;
     footerLinks.forEach((link) => {
-      console.log(link.offsetWidth, link.offsetHeight, footerWrapperWidth);
       if (footerWrapperWidth < link.offsetWidth) {
-        console.log(paramLang === lang.ja);
         let textW = footerWrapperWidth / link.innerHTML.length;
         if (textS < textW * k && textW * k < fs) {
           textS = textW * k;

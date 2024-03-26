@@ -9,6 +9,7 @@ const autoprefixer = require("gulp-autoprefixer");
 const cleanCSS = require("gulp-clean-css");
 const ttf2woff = require("gulp-ttf2woff");
 const image = require("gulp-image");
+const webp = require("gulp-webp");
 const babel = require("gulp-babel");
 const sourcemaps = require("gulp-sourcemaps");
 const browsersync = require("browser-sync").create();
@@ -27,6 +28,7 @@ function images() {
     "src/images/**/*.svg",
   ])
     .pipe(image())
+    .pipe(webp())
     .pipe(dest("dist/images/"));
 }
 function font() {
