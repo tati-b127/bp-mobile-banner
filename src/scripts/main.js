@@ -12,6 +12,39 @@ window.addEventListener("DOMContentLoaded", () => {
     PT: "pt-BR",
   };
   let lang = { de: "de", en: "en", es: "es", fr: "fr", ja: "ja", pt: "pt" };
+
+  // i18next
+  //   .init({
+  //     lng: paramLang || locale,
+  //     fallbackLng: "en",
+  //     resources: {
+  //       en: {
+  //         translation: require("./locale/en.json"),
+  //       },
+  //       de: {
+  //         translation: require("./locale/de.json"),
+  //       },
+  //       es: {
+  //         translation: require("./locale/es.json"),
+  //       },
+  //       fr: {
+  //         translation: require("./locale/fr.json"),
+  //       },
+  //       ja: {
+  //         translation: require("./locale/ja.json"),
+  //       },
+  //       pt: {
+  //         translation: require("./locale/pt.json"),
+  //       },
+  //     },
+  //   })
+  //   .then(() => {
+  //     console.log(i18next.t("translation"));
+  //     const data = i18next.t("translation");
+  //     console.log(data);
+  //     createLocalePage(data);
+  //   });
+
   Promise.all([
     fetch("locale/de.json"),
     fetch("locale/en.json"),
